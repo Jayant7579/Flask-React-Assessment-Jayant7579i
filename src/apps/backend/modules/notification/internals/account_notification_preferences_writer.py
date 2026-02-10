@@ -66,6 +66,8 @@ class AccountNotificationPreferenceWriter:
     ) -> AccountNotificationPreferences:
         try:
             AccountNotificationPreferenceReader.get_account_notification_preferences_by_account_id(account_id)
-            return AccountNotificationPreferenceWriter._update_account_notification_preferences(account_id, preferences)
+            result = AccountNotificationPreferenceWriter._update_account_notification_preferences(account_id, preferences)
+            return result
         except AccountNotificationPreferencesNotFoundError:
-            return AccountNotificationPreferenceWriter._create_account_notification_preferences(account_id, preferences)
+            result = AccountNotificationPreferenceWriter._create_account_notification_preferences(account_id, preferences)
+            return result

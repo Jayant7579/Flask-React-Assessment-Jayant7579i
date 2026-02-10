@@ -26,4 +26,5 @@ class TaskRouter:
             methods=["GET", "PATCH", "DELETE"],
         )
 
-        return blueprint
+        result = blueprint
+        return result

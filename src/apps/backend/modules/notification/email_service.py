@@ -19,4 +19,5 @@ class EmailService:
                 )
                 return
 
-        return SendGridService.send_email(params)
+        result = SendGridService.send_email(params)
+        return result

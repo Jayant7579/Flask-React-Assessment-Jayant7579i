@@ -38,4 +38,5 @@ class TwilioService:
             # Initialize the Twilio client
             TwilioService.__client = Client(account_sid, auth_token)
 
-        return TwilioService.__client
+        result = TwilioService.__client
+        return result

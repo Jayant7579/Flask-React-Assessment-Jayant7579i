@@ -40,4 +40,5 @@ class AccountModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "accounts"
+        result = "accounts"
+        return result

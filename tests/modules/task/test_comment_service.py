@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from modules.application.common.types import PaginationParams
-from modules.task.comment_errors import CommentNotFoundError
+from modules.task.errors import CommentNotFoundError
 from modules.task.comment_service import CommentService
 from modules.task.comment_types import (
     CommentErrorCode,

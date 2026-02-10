@@ -50,4 +50,5 @@ class AccountRepository(ApplicationRepository):
                 collection.database.create_collection(cls.collection_name, validator=ACCOUNT_VALIDATION_SCHEMA)
             else:
                 Logger.error(message=f"OperationFailure occurred for collection accounts: {e.details}")
-        return True
+        result = True
+        return result

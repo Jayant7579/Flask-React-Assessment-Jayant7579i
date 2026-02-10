@@ -32,4 +32,5 @@ class SendGridService:
         if not SendGridService.__client:
             api_key = ConfigService[str].get_value(key="sendgrid.api_key")
             SendGridService.__client = sendgrid.SendGridAPIClient(api_key=api_key)
-        return SendGridService.__client
+        result = SendGridService.__client
+        return result

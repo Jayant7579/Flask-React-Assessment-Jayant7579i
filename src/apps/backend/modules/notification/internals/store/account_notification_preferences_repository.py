@@ -63,4 +63,5 @@ class AccountNotificationPreferencesRepository(ApplicationRepository):
                 Logger.error(
                     message=f"OperationFailure occurred for collection account_notification_preferences: {e.details}"
                 )
-        return True
+        result = True
+        return result

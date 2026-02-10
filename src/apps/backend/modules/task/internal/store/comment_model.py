@@ -31,4 +31,5 @@ class CommentModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "task_comments"
+        result = "task_comments"
+        return result

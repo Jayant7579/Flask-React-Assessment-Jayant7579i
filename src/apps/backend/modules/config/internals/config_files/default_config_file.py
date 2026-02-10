@@ -11,4 +11,5 @@ class DefaultConfig:
     @staticmethod
     def load() -> Config:
         default_config_dict = ConfigUtil.read_yml_from_config_dir(DefaultConfig.FILENAME)
-        return cast(Config, default_config_dict)
+        result = cast(Config, default_config_dict)
+        return result

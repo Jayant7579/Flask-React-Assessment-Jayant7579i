@@ -33,7 +33,8 @@ class AccountView(MethodView):
             account_params = CreateAccountByUsernameAndPasswordParams(**request_data)
             account = AccountService.create_account_by_username_and_password(params=account_params)
         account_dict = asdict(account)
-        return jsonify(account_dict), 201
+        result = jsonify(account_dict), 201
+        return result
 
     @access_auth_middleware
     def get(self, id: str) -> ResponseReturnValue:
@@ -52,7 +53,8 @@ class AccountView(MethodView):
             except AccountNotificationPreferencesNotFoundError:
                 pass
 
-        return jsonify(account_dict), 200
+        result = jsonify(account_dict), 200
+        return result
 
     def patch(self, id: str) -> ResponseReturnValue:
         request_data = request.get_json()
@@ -71,12 +73,14 @@ class AccountView(MethodView):
             raise AccountBadRequestError("Invalid request data")
 
         account_dict = asdict(account)
-        return jsonify(account_dict), 200
+        result = jsonify(account_dict), 200
+        return result
 
     @access_auth_middleware
     def delete(self, id: str) -> ResponseReturnValue:
         AccountService.delete_account(account_id=id)
-        return "", 204
+        result = "", 204
+        return result
 
     @staticmethod
     def update_account_notification_preferences(account_id: str) -> ResponseReturnValue:
@@ -111,4 +115,5 @@ class AccountView(MethodView):
             account_id=account_id, preferences=preferences_params
         )
 
-        return jsonify(asdict(updated_preferences)), 200
+        result = jsonify(asdict(updated_preferences)), 200
+        return result

@@ -24,7 +24,8 @@ class SortDirection(Enum):
     def from_string(cls, value: str) -> "SortDirection":
         for member in cls:
             if member.string_value == value:
-                return member
+                result = member
+                return result
         raise ValueError(f"Invalid sort direction: {value}")
 
 

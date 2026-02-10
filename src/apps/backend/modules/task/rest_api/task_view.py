@@ -40,7 +40,8 @@ class TaskView(MethodView):
         created_task = TaskService.create_task(params=create_task_params)
         task_dict = asdict(created_task)
 
-        return jsonify(task_dict), 201
+        result = jsonify(task_dict), 201
+        return result
 
     @access_auth_middleware
     def get(self, account_id: str, task_id: Optional[str] = None) -> ResponseReturnValue:
@@ -48,7 +49,8 @@ class TaskView(MethodView):
             task_params = GetTaskParams(account_id=account_id, task_id=task_id)
             task = TaskService.get_task(params=task_params)
             task_dict = asdict(task)
-            return jsonify(task_dict), 200
+            result = jsonify(task_dict), 200
+            return result
         else:
             page = request.args.get("page", type=int)
             size = request.args.get("size", type=int)
@@ -71,7 +73,8 @@ class TaskView(MethodView):
 
             response_data = asdict(pagination_result)
 
-            return jsonify(response_data), 200
+            result = jsonify(response_data), 200
+            return result
 
     @access_auth_middleware
     def patch(self, account_id: str, task_id: str) -> ResponseReturnValue:
@@ -93,7 +96,8 @@ class TaskView(MethodView):
         updated_task = TaskService.update_task(params=update_task_params)
         task_dict = asdict(updated_task)
 
-        return jsonify(task_dict), 200
+        result = jsonify(task_dict), 200
+        return result
 
     @access_auth_middleware
     def delete(self, account_id: str, task_id: str) -> ResponseReturnValue:
@@ -101,4 +105,5 @@ class TaskView(MethodView):
 
         TaskService.delete_task(params=delete_params)
 
-        return "", 204
+        result = "", 204
+        return result

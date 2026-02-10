@@ -10,7 +10,8 @@ class AppError(Exception):
         super().__init__(self.message)
 
     def to_str(self) -> str:
-        return f"{self.code}: {self.message}"
+        result = f"{self.code}: {self.message}"
+        return result
 
     def to_dict(self) -> dict[str, Any]:
         error_dict = {
@@ -20,7 +21,8 @@ class AppError(Exception):
             "args": self.args,
             "with_traceback": self.with_traceback,
         }
-        return error_dict
+        result = error_dict
+        return result
 
 
 @dataclass(frozen=True)

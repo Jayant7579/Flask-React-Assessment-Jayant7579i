@@ -9,12 +9,23 @@ from modules.application.common.types import PaginationParams, SortParams
 @dataclass
 class BaseModel:
     def to_bson(self) -> dict[str, Any]:
+        # Turn the dataclass into a dict we can store in MongoDB
         data = asdict(self)
-        if data.get("id") is not None:
-            data["_id"] = data.pop("id")
-        else:
-            data.pop("id", None)
-        return data
+        mongo_data: dict[str, Any] = {}
+
+        # Copy fields one by one (explicit is easier to follow)
+        for key, value in data.items():
+            mongo_data[key] = value
+
+        # Mongo expects "_id" instead of "id"
+        if "id" in mongo_data:
+            if mongo_data["id"] is not None:
+                mongo_data["_id"] = mongo_data["id"]
+            # Always remove the "id" field
+            mongo_data.pop("id", None)
+
+        result = mongo_data
+        return result
 
     @staticmethod
     def calculate_pagination_values(
@@ -24,19 +35,30 @@ class BaseModel:
         size = pagination_params.size
         offset = pagination_params.offset
 
+        # Calculate how many records to skip
+        skip = 0
         skip = (page - 1) * size + offset
 
-        total_pages = (total_count + size - 1) // size if size > 0 else 0
+        # Calculate total pages (avoid divide by zero)
+        total_pages = 0
+        if size > 0:
+            total_pages = (total_count + size - 1) // size
 
-        return pagination_params, skip, total_pages
+        result = pagination_params, skip, total_pages
+        return result
 
     @staticmethod
     def apply_sort_params(cursor: Cursor, sort_params: Optional[SortParams]) -> Cursor:
-        if sort_params:
-            return cursor.sort(
-                [
-                    (sort_params.sort_by, sort_params.sort_direction.numeric_value),
-                    ("_id", sort_params.sort_direction.numeric_value),
-                ]
-            )
-        return cursor
+        if sort_params is None:
+            result = cursor
+            return result
+
+        sort_by = sort_params.sort_by
+        sort_dir = sort_params.sort_direction.numeric_value
+
+        sort_list = []
+        sort_list.append((sort_by, sort_dir))
+        sort_list.append(("_id", sort_dir))
+
+        result = cursor.sort(sort_list)
+        return result

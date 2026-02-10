@@ -42,4 +42,5 @@ class PasswordResetTokenRepository(ApplicationRepository):
                 )
             else:
                 Logger.error(message=f"OperationFailure occurred for collection PasswordResetToken: {e.details}")
-        return True
+        result = True
+        return result

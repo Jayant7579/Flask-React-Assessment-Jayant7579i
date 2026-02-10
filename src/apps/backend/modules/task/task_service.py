@@ -15,20 +15,25 @@ from modules.task.types import (
 class TaskService:
     @staticmethod
     def create_task(*, params: CreateTaskParams) -> Task:
-        return TaskWriter.create_task(params=params)
+        result = TaskWriter.create_task(params=params)
+        return result
 
     @staticmethod
     def get_task(*, params: GetTaskParams) -> Task:
-        return TaskReader.get_task(params=params)
+        result = TaskReader.get_task(params=params)
+        return result
 
     @staticmethod
     def get_paginated_tasks(*, params: GetPaginatedTasksParams) -> PaginationResult[Task]:
-        return TaskReader.get_paginated_tasks(params=params)
+        result = TaskReader.get_paginated_tasks(params=params)
+        return result
 
     @staticmethod
     def update_task(*, params: UpdateTaskParams) -> Task:
-        return TaskWriter.update_task(params=params)
+        result = TaskWriter.update_task(params=params)
+        return result
 
     @staticmethod
     def delete_task(*, params: DeleteTaskParams) -> TaskDeletionResult:
-        return TaskWriter.delete_task(params=params)
+        result = TaskWriter.delete_task(params=params)
+        return result

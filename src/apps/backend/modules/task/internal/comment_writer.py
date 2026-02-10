@@ -3,7 +3,7 @@ from datetime import datetime
 from bson.objectid import ObjectId
 from pymongo import ReturnDocument
 
-from modules.task.comment_errors import CommentNotFoundError
+from modules.task.errors import CommentNotFoundError
 from modules.task.comment_types import (
     Comment,
     CommentDeletionResult,
@@ -28,7 +28,8 @@ class CommentWriter:
         query = CommentRepository.collection().insert_one(comment_bson)
         created_comment_bson = CommentRepository.collection().find_one({"_id": query.inserted_id})
 
-        return CommentUtil.convert_comment_bson_to_comment(created_comment_bson)
+        result = CommentUtil.convert_comment_bson_to_comment(created_comment_bson)
+        return result
 
     @staticmethod
     def update_comment(*, params: UpdateCommentParams) -> Comment:
@@ -46,7 +47,8 @@ class CommentWriter:
         if updated_comment_bson is None:
             raise CommentNotFoundError(comment_id=params.comment_id)
 
-        return CommentUtil.convert_comment_bson_to_comment(updated_comment_bson)
+        result = CommentUtil.convert_comment_bson_to_comment(updated_comment_bson)
+        return result
 
     @staticmethod
     def delete_comment(*, params: DeleteCommentParams) -> CommentDeletionResult:
@@ -66,4 +68,5 @@ class CommentWriter:
         if updated_comment_bson is None:
             raise CommentNotFoundError(comment_id=params.comment_id)
 
-        return CommentDeletionResult(comment_id=params.comment_id, deleted_at=deletion_time, success=True)
+        result = CommentDeletionResult(comment_id=params.comment_id, deleted_at=deletion_time, success=True)
+        return result

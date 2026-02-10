@@ -16,11 +16,14 @@ class DatadogHandler(StreamHandler):
 
     def __get_status(self, record: LogRecord) -> str:
         if record.levelno in [logging.NOTSET, logging.DEBUG, logging.INFO]:
-            return "info"
+            result = "info"
+            return result
         elif record.levelno in [logging.WARNING]:
-            return "warn"
+            result = "warn"
+            return result
         else:
-            return "error"
+            result = "error"
+            return result
 
     def emit(self, record: LogRecord) -> None:
         msg = self.format(record)

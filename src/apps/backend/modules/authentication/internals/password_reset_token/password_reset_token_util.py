@@ -16,28 +16,34 @@ class PasswordResetTokenUtil:
 
     @staticmethod
     def hash_password(password: str) -> str:
-        return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=10)).decode()
+        result = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=10)).decode()
+        return result
 
     @staticmethod
     def compare_password(*, password: str, hashed_password: str) -> bool:
-        return bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8"))
+        result = bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8"))
+        return result
 
     @staticmethod
     def generate_password_reset_token() -> str:
-        return hashlib.sha256(os.urandom(60)).hexdigest()
+        result = hashlib.sha256(os.urandom(60)).hexdigest()
+        return result
 
     @staticmethod
     def hash_password_reset_token(reset_token: str) -> str:
-        return bcrypt.hashpw(reset_token.encode("utf-8"), bcrypt.gensalt(rounds=10)).decode()
+        result = bcrypt.hashpw(reset_token.encode("utf-8"), bcrypt.gensalt(rounds=10)).decode()
+        return result
 
     @staticmethod
     def get_token_expires_at() -> datetime:
         default_token_expire_time_in_seconds = ConfigService[int].get_value(key="accounts.token_expires_in_seconds")
-        return datetime.now() + timedelta(seconds=default_token_expire_time_in_seconds)
+        result = datetime.now() + timedelta(seconds=default_token_expire_time_in_seconds)
+        return result
 
     @staticmethod
     def is_token_expired(expires_at: datetime) -> bool:
-        return datetime.now() > expires_at
+        result = datetime.now() > expires_at
+        return result
 
     @staticmethod
     def convert_password_reset_token_bson_to_password_reset_token(

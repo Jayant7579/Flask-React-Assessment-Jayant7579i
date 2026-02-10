@@ -28,7 +28,8 @@ class PhoneNumber:
     phone_number: str
 
     def __str__(self) -> str:
-        return f"{self.country_code} {self.phone_number}"
+        result = f"{self.country_code} {self.phone_number}"
+        return result
 
 
 @dataclass(frozen=True)

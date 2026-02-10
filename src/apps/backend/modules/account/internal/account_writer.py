@@ -39,7 +39,8 @@ class AccountWriter:
         query = AccountRepository.collection().insert_one(account_bson)
         account_bson = AccountRepository.collection().find_one({"_id": query.inserted_id})
 
-        return AccountUtil.convert_account_bson_to_account(account_bson)
+        result = AccountUtil.convert_account_bson_to_account(account_bson)
+        return result
 
     @staticmethod
     def create_account_by_phone_number(*, params: CreateAccountByPhoneNumberParams) -> Account:
@@ -57,7 +58,8 @@ class AccountWriter:
         query = AccountRepository.collection().insert_one(account_bson)
         account_bson = AccountRepository.collection().find_one({"_id": query.inserted_id})
 
-        return AccountUtil.convert_account_bson_to_account(account_bson)
+        result = AccountUtil.convert_account_bson_to_account(account_bson)
+        return result
 
     @staticmethod
     def update_password_by_account_id(account_id: str, password: str) -> Account:
@@ -70,7 +72,8 @@ class AccountWriter:
         if updated_account is None:
             raise AccountWithIdNotFoundError(id=account_id)
 
-        return AccountUtil.convert_account_bson_to_account(updated_account)
+        result = AccountUtil.convert_account_bson_to_account(updated_account)
+        return result
 
     @staticmethod
     def update_account_profile(*, account_id: str, params: UpdateAccountProfileParams) -> Account:
@@ -88,7 +91,8 @@ class AccountWriter:
         if updated_account is None:
             raise AccountWithIdNotFoundError(id=account_id)
 
-        return AccountUtil.convert_account_bson_to_account(updated_account)
+        result = AccountUtil.convert_account_bson_to_account(updated_account)
+        return result
 
     @staticmethod
     def delete_account(*, account_id: str) -> AccountDeletionResult:
@@ -102,4 +106,5 @@ class AccountWriter:
         if updated_account is None:
             raise AccountWithIdNotFoundError(id=account_id)
 
-        return AccountDeletionResult(account_id=account_id, deleted_at=deletion_time, success=True)
+        result = AccountDeletionResult(account_id=account_id, deleted_at=deletion_time, success=True)
+        return result

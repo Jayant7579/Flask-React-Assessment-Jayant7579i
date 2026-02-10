@@ -2,7 +2,7 @@ from bson.objectid import ObjectId
 
 from modules.application.common.base_model import BaseModel
 from modules.application.common.types import PaginationResult
-from modules.task.comment_errors import CommentNotFoundError
+from modules.task.errors import CommentNotFoundError
 from modules.task.comment_types import Comment, GetCommentParams, GetPaginatedCommentsParams
 from modules.task.internal.comment_util import CommentUtil
 from modules.task.internal.store.comment_repository import CommentRepository
@@ -21,7 +21,8 @@ class CommentReader:
         )
         if comment_bson is None:
             raise CommentNotFoundError(comment_id=params.comment_id)
-        return CommentUtil.convert_comment_bson_to_comment(comment_bson)
+        result = CommentUtil.convert_comment_bson_to_comment(comment_bson)
+        return result
 
     @staticmethod
     def get_paginated_comments(*, params: GetPaginatedCommentsParams) -> PaginationResult[Comment]:

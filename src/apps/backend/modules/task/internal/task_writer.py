@@ -28,7 +28,8 @@ class TaskWriter:
         query = TaskRepository.collection().insert_one(task_bson)
         created_task_bson = TaskRepository.collection().find_one({"_id": query.inserted_id})
 
-        return TaskUtil.convert_task_bson_to_task(created_task_bson)
+        result = TaskUtil.convert_task_bson_to_task(created_task_bson)
+        return result
 
     @staticmethod
     def update_task(*, params: UpdateTaskParams) -> Task:
@@ -41,7 +42,8 @@ class TaskWriter:
         if updated_task_bson is None:
             raise TaskNotFoundError(task_id=params.task_id)
 
-        return TaskUtil.convert_task_bson_to_task(updated_task_bson)
+        result = TaskUtil.convert_task_bson_to_task(updated_task_bson)
+        return result
 
     @staticmethod
     def delete_task(*, params: DeleteTaskParams) -> TaskDeletionResult:
@@ -57,4 +59,5 @@ class TaskWriter:
         if updated_task_bson is None:
             raise TaskNotFoundError(task_id=params.task_id)
 
-        return TaskDeletionResult(task_id=params.task_id, deleted_at=deletion_time, success=True)
+        result = TaskDeletionResult(task_id=params.task_id, deleted_at=deletion_time, success=True)
+        return result

@@ -30,11 +30,13 @@ class AccountService:
                 email_enabled=True, push_enabled=True, sms_enabled=True
             ),
         )
-        return account
+        result = account
+        return result
 
     @staticmethod
     def get_account_by_phone_number(*, phone_number: PhoneNumber) -> Account:
-        return AccountReader.get_account_by_phone_number(phone_number=phone_number)
+        result = AccountReader.get_account_by_phone_number(phone_number=phone_number)
+        return result
 
     @staticmethod
     def get_or_create_account_by_phone_number(*, params: CreateAccountByPhoneNumberParams) -> Account:
@@ -52,7 +54,8 @@ class AccountService:
         create_otp_params = CreateOTPParams(phone_number=params.phone_number)
         AuthenticationService.create_otp(params=create_otp_params, account_id=account.id)
 
-        return account
+        result = account
+        return result
 
     @staticmethod
     def reset_account_password(*, params: ResetPasswordParams) -> Account:
@@ -68,23 +71,28 @@ class AccountService:
 
         AuthenticationService.set_password_reset_token_as_used_by_id(password_reset_token_id=password_reset_token.id)
 
-        return updated_account
+        result = updated_account
+        return result
 
     @staticmethod
     def get_account_by_id(*, params: AccountSearchByIdParams) -> Account:
-        return AccountReader.get_account_by_id(params=params)
+        result = AccountReader.get_account_by_id(params=params)
+        return result
 
     @staticmethod
     def get_account_by_username(*, username: str) -> Account:
-        return AccountReader.get_account_by_username(username=username)
+        result = AccountReader.get_account_by_username(username=username)
+        return result
 
     @staticmethod
     def get_account_by_username_and_password(*, params: AccountSearchParams) -> Account:
-        return AccountReader.get_account_by_username_and_password(params=params)
+        result = AccountReader.get_account_by_username_and_password(params=params)
+        return result
 
     @staticmethod
     def update_account_profile(*, account_id: str, params: UpdateAccountProfileParams) -> Account:
-        return AccountWriter.update_account_profile(account_id=account_id, params=params)
+        result = AccountWriter.update_account_profile(account_id=account_id, params=params)
+        return result
 
     @staticmethod
     def create_or_update_account_notification_preferences(
@@ -96,8 +104,10 @@ class AccountService:
 
     @staticmethod
     def get_account_notification_preferences_by_account_id(*, account_id: str) -> AccountNotificationPreferences:
-        return NotificationService.get_account_notification_preferences_by_account_id(account_id=account_id)
+        result = NotificationService.get_account_notification_preferences_by_account_id(account_id=account_id)
+        return result
 
     @staticmethod
     def delete_account(*, account_id: str) -> AccountDeletionResult:
-        return AccountWriter.delete_account(account_id=account_id)
+        result = AccountWriter.delete_account(account_id=account_id)
+        return result

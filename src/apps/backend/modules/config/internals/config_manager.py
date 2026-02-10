@@ -23,10 +23,12 @@ class ConfigManager:
 
     def get(self, key: str, default: Optional[ConfigType] = None) -> Optional[ConfigType]:
         value = self._traverse_config(key)
-        return value if value is not None else default
+        result = value if value is not None else default
+        return result
 
     def has(self, key: str) -> bool:
-        return self._traverse_config(key) is not None
+        result = self._traverse_config(key) is not None
+        return result
 
     def _traverse_config(self, key: str) -> Optional[ConfigType]:
         values = self.config_store
@@ -37,8 +39,10 @@ class ConfigManager:
             next_values = values[k]
 
             if not isinstance(next_values, dict):
-                return cast(ConfigType, next_values)
+                result = cast(ConfigType, next_values)
+                return result
 
             values = next_values
 
-        return cast(ConfigType, values)
+        result = cast(ConfigType, values)
+        return result

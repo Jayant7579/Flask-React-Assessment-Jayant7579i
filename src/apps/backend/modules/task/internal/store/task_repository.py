@@ -43,4 +43,5 @@ class TaskRepository(ApplicationRepository):
                 collection.database.create_collection(cls.collection_name, validator=TASK_VALIDATION_SCHEMA)
             else:
                 Logger.error(message=f"OperationFailure occurred for collection tasks: {e.details}")
-        return True
+        result = True
+        return result

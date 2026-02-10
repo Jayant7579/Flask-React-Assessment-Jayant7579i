@@ -67,4 +67,5 @@ app.register_blueprint(react_blueprint)
 
 @app.errorhandler(AppError)
 def handle_error(exc: AppError) -> ResponseReturnValue:
-    return jsonify({"message": exc.message, "code": exc.code}), exc.http_code or 500
+    result = jsonify({"message": exc.message, "code": exc.code}), exc.http_code or 500
+    return result

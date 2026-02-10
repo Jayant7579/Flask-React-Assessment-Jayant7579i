@@ -45,4 +45,5 @@ class CommentRepository(ApplicationRepository):
                 collection.database.create_collection(cls.collection_name, validator=COMMENT_VALIDATION_SCHEMA)
             else:
                 Logger.error(message=f"OperationFailure occurred for collection task_comments: {e.details}")
-        return True
+        result = True
+        return result

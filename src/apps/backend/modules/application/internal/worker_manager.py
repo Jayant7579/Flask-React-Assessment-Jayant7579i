@@ -46,7 +46,8 @@ class WorkerManager:
     @staticmethod
     async def _get_worker_status(handle: WorkflowHandle) -> Optional[WorkflowExecutionStatus]:
         info = await handle.describe()
-        return info.status
+        result = info.status
+        return result
 
     @staticmethod
     async def _start_worker(cls: Type[BaseWorker], arguments: Tuple[Any, ...], cron_schedule: str = "") -> str:
@@ -66,9 +67,11 @@ class WorkerManager:
             )
         except WorkflowAlreadyStartedError:
             Logger.info(message=f"Worker {worker_id} already running, skipping starting new instance")
-            return worker_id
+            result = worker_id
+            return result
 
-        return handle.id
+        result = handle.id
+        return result
 
     @staticmethod
     async def _get_worker_by_id(worker_id: str) -> Worker:
@@ -87,11 +90,13 @@ class WorkerManager:
 
     @staticmethod
     async def _run_worker_immediately(cls: Type[BaseWorker], arguments: Tuple[Any, ...]) -> str:
-        return await WorkerManager._start_worker(cls, arguments)
+        result = await WorkerManager._start_worker(cls, arguments)
+        return result
 
     @staticmethod
     async def _schedule_worker_as_cron(cls: Type[BaseWorker], cron_schedule: str) -> str:
-        return await WorkerManager._start_worker(cls, (), cron_schedule)
+        result = await WorkerManager._start_worker(cls, (), cron_schedule)
+        return result
 
     @staticmethod
     async def _cancel_worker(worker_id: str) -> None:
@@ -138,7 +143,8 @@ class WorkerManager:
         except RPCError:
             raise WorkerIdNotFoundError(worker_id=worker_id)
 
-        return res
+        result = res
+        return result
 
     @staticmethod
     def run_worker_immediately(*, cls: Type[BaseWorker], arguments: Tuple[Any, ...]) -> str:
@@ -148,7 +154,8 @@ class WorkerManager:
         except RPCError:
             raise WorkerStartError(worker_name=cls.__name__)
 
-        return worker_id
+        result = worker_id
+        return result
 
     @staticmethod
     def schedule_worker_as_cron(*, cls: Type[BaseWorker], cron_schedule: str) -> str:
@@ -158,7 +165,8 @@ class WorkerManager:
         except RPCError:
             raise WorkerStartError(worker_name=cls.__name__)
 
-        return worker_id
+        result = worker_id
+        return result
 
     @staticmethod
     def cancel_worker(*, worker_id: str) -> None:

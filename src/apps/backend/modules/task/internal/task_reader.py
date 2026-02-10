@@ -16,7 +16,8 @@ class TaskReader:
         )
         if task_bson is None:
             raise TaskNotFoundError(task_id=params.task_id)
-        return TaskUtil.convert_task_bson_to_task(task_bson)
+        result = TaskUtil.convert_task_bson_to_task(task_bson)
+        return result
 
     @staticmethod
     def get_paginated_tasks(*, params: GetPaginatedTasksParams) -> PaginationResult[Task]:

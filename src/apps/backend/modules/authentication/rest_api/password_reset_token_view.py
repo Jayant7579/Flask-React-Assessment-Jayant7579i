@@ -16,4 +16,5 @@ class PasswordResetTokenView(MethodView):
         account_obj = AccountService.get_account_by_username(username=password_reset_token_params.username)
         password_reset_token = AuthenticationService.create_password_reset_token(params=account_obj)
         password_reset_token_dict = asdict(password_reset_token)
-        return jsonify(password_reset_token_dict), 201
+        result = jsonify(password_reset_token_dict), 201
+        return result

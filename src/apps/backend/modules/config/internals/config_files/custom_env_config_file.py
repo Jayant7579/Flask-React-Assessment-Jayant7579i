@@ -13,13 +13,15 @@ class CustomEnvConfig:
     def load() -> Config:
         custom_env_config = ConfigUtil.read_yml_from_config_dir(CustomEnvConfig.FILENAME)
         custom_env_dict = CustomEnvConfig._apply_environment_overrides(custom_env_config)
-        return cast(Config, custom_env_dict)
+        result = cast(Config, custom_env_dict)
+        return result
 
     @staticmethod
     def _apply_environment_overrides(data: dict[str, Any]) -> dict[str, Any]:
 
         if not isinstance(data, dict):
-            return data
+            result = data
+            return result
 
         updated_data = {}
 
@@ -31,7 +33,8 @@ class CustomEnvConfig:
                 if result is not None:
                     updated_data[key] = result
 
-        return updated_data
+        result = updated_data
+        return result
 
     @staticmethod
     def _search_and_replace_dict_value_with_env(value: dict[str, Any]) -> Any:
@@ -39,12 +42,15 @@ class CustomEnvConfig:
             env_var_name = value["__name"]
             env_var_value = os.getenv(env_var_name)
             value_format = value.get("__format")
-            return CustomEnvConfig._parse_value(env_var_value, value_format) if value_format else env_var_value
-        return CustomEnvConfig._apply_environment_overrides(value)
+            result = CustomEnvConfig._parse_value(env_var_value, value_format) if value_format else env_var_value
+            return result
+        result = CustomEnvConfig._apply_environment_overrides(value)
+        return result
 
     @staticmethod
     def _search_and_get_str_value_from_env(key: str) -> Optional[str]:
-        return os.getenv(key)
+        result = os.getenv(key)
+        return result
 
     @staticmethod
     def _parse_value(value: Optional[str], value_format: str) -> int | float | bool | None:
@@ -61,6 +67,7 @@ class CustomEnvConfig:
             raise ValueError(f"Unsupported format: {value_format}")
 
         try:
-            return parser(value)
+            result = parser(value)
+            return result
         except Exception as e:
             raise ValueError(f"Error parsing value '{value}' as {value_format}: {e}") from e

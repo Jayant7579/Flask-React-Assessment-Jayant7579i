@@ -51,4 +51,5 @@ class PasswordResetTokenReader:
                 f"Password reset link is invalid for accountId {account_id}. Please retry with new link."
             )
 
-        return password_reset_token
+        result = password_reset_token
+        return result

@@ -34,4 +34,5 @@ class EmailParams:
 
     @staticmethod
     def is_email_valid(email: str) -> bool:
-        return bool(re.match(EmailParams.email_regex, email.lower()))  # Use your email_regex
+        result = bool(re.match(EmailParams.email_regex, email.lower()))  # Use your email_regex
+        return result

@@ -18,24 +18,29 @@ class CommentService:
     @staticmethod
     def create_comment(*, params: CreateCommentParams) -> Comment:
         TaskReader.get_task(params=GetTaskParams(account_id=params.account_id, task_id=params.task_id))
-        return CommentWriter.create_comment(params=params)
+        result = CommentWriter.create_comment(params=params)
+        return result
 
     @staticmethod
     def get_comment(*, params: GetCommentParams) -> Comment:
         TaskReader.get_task(params=GetTaskParams(account_id=params.account_id, task_id=params.task_id))
-        return CommentReader.get_comment(params=params)
+        result = CommentReader.get_comment(params=params)
+        return result
 
     @staticmethod
     def get_paginated_comments(*, params: GetPaginatedCommentsParams) -> PaginationResult[Comment]:
         TaskReader.get_task(params=GetTaskParams(account_id=params.account_id, task_id=params.task_id))
-        return CommentReader.get_paginated_comments(params=params)
+        result = CommentReader.get_paginated_comments(params=params)
+        return result
 
     @staticmethod
     def update_comment(*, params: UpdateCommentParams) -> Comment:
         TaskReader.get_task(params=GetTaskParams(account_id=params.account_id, task_id=params.task_id))
-        return CommentWriter.update_comment(params=params)
+        result = CommentWriter.update_comment(params=params)
+        return result
 
     @staticmethod
     def delete_comment(*, params: DeleteCommentParams) -> CommentDeletionResult:
         TaskReader.get_task(params=GetTaskParams(account_id=params.account_id, task_id=params.task_id))
-        return CommentWriter.delete_comment(params=params)
+        result = CommentWriter.delete_comment(params=params)
+        return result

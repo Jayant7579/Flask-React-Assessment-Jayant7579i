@@ -20,10 +20,12 @@ class ApplicationRepositoryClient:
             if cls._client is None:
                 cls._client = cls._create_client()
 
-            return cls._client
+            result = cls._client
+            return result
 
         else:
-            return cls._create_client()
+            result = cls._create_client()
+            return result
 
     @staticmethod
     def _create_client() -> MongoClient:
@@ -32,7 +34,8 @@ class ApplicationRepositoryClient:
         client = MongoClient(connection_uri, server_api=ServerApi("1"))
         Logger.info(message=f"connected to database - {connection_uri}")
 
-        return client
+        result = client
+        return result
 
 
 class ApplicationRepository(ABC):
@@ -56,8 +59,10 @@ class ApplicationRepository(ABC):
 
             cls._collection = collection
 
-        return cls._collection
+        result = cls._collection
+        return result
 
     @classmethod
     def on_init_collection(cls, collection: Collection) -> bool:
-        return False
+        result = False
+        return result

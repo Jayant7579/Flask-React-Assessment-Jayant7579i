@@ -34,4 +34,5 @@ class NotificationService:
 
     @staticmethod
     def get_account_notification_preferences_by_account_id(*, account_id: str) -> AccountNotificationPreferences:
-        return AccountNotificationPreferenceReader.get_account_notification_preferences_by_account_id(account_id)
+        result = AccountNotificationPreferenceReader.get_account_notification_preferences_by_account_id(account_id)
+        return result

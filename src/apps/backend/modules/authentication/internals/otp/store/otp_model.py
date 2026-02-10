@@ -37,4 +37,5 @@ class OTPModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "otps"
+        result = "otps"
+        return result

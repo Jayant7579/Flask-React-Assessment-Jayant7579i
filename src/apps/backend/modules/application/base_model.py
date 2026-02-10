@@ -11,4 +11,5 @@ class BaseModel:
             data["_id"] = data.pop("id")
         else:
             data.pop("id", None)
-        return data
+        result = data
+        return result

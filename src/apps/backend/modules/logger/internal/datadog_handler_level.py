@@ -11,5 +11,7 @@ class LogLevel:
         datadog_level = ddconfig_level.lower()
         for level in Levels:
             if datadog_level.lower() == level.name:
-                return level.value
-        return logging.DEBUG
+                result = level.value
+                return result
+        result = logging.DEBUG
+        return result

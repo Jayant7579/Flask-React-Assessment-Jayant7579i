@@ -28,6 +28,8 @@ def access_auth_middleware(next_func: Callable) -> Callable:
             raise UnauthorizedAccessError("Unauthorized access.")
 
         setattr(request, "account_id", auth_payload.account_id)  # Set account_id attribute on request
-        return next_func(*args, **kwargs)
+        result = next_func(*args, **kwargs)
+        return result
 
-    return wrapper
+    result = wrapper
+    return result

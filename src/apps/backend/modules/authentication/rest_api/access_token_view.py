@@ -36,4 +36,5 @@ class AccessTokenView(MethodView):
             )
             access_token = AuthenticationService.create_access_token_by_username_and_password(account=account)
         access_token_dict = asdict(access_token)
-        return jsonify(access_token_dict), 201
+        result = jsonify(access_token_dict), 201
+        return result

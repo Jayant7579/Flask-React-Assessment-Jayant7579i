@@ -40,4 +40,5 @@ class PasswordResetTokenWriter:
         if updated_token is None:
             raise PasswordResetTokenNotFoundError()
 
-        return PasswordResetTokenUtil.convert_password_reset_token_bson_to_password_reset_token(updated_token)
+        result = PasswordResetTokenUtil.convert_password_reset_token_bson_to_password_reset_token(updated_token)
+        return result

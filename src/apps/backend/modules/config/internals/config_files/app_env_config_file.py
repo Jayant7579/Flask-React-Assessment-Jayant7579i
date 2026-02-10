@@ -14,4 +14,5 @@ class AppEnvConfig:
         app_env = os.environ.get("APP_ENV", "development")
         AppEnvConfig.FILENAME = f"{app_env}.yml"
         app_env_dict = ConfigUtil.read_yml_from_config_dir(AppEnvConfig.FILENAME)
-        return cast(Config, app_env_dict)
+        result = cast(Config, app_env_dict)
+        return result

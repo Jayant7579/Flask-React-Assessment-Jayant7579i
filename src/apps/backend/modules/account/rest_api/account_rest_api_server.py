@@ -7,4 +7,5 @@ class AccountRestApiServer:
     @staticmethod
     def create() -> Blueprint:
         account_api_blueprint = Blueprint("account", __name__)
-        return AccountRouter.create_route(blueprint=account_api_blueprint)
+        result = AccountRouter.create_route(blueprint=account_api_blueprint)
+        return result

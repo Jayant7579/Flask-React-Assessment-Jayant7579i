@@ -29,7 +29,8 @@ class AccountReader:
         if account_bson is None:
             raise AccountWithUsernameNotFoundError(username=username)
 
-        return AccountUtil.convert_account_bson_to_account(account_bson)
+        result = AccountUtil.convert_account_bson_to_account(account_bson)
+        return result
 
     @staticmethod
     def get_account_by_username_and_password(*, params: AccountSearchParams) -> Account:
@@ -37,7 +38,8 @@ class AccountReader:
 
         if not AccountUtil.compare_password(password=params.password, hashed_password=account.hashed_password):
             raise AccountInvalidPasswordError()
-        return account
+        result = account
+        return result
 
     @staticmethod
     def get_account_by_id(*, params: AccountSearchByIdParams) -> Account:
@@ -45,7 +47,8 @@ class AccountReader:
         if account_bson is None:
             raise AccountWithIdNotFoundError(id=params.id)
 
-        return AccountUtil.convert_account_bson_to_account(account_bson)
+        result = AccountUtil.convert_account_bson_to_account(account_bson)
+        return result
 
     @staticmethod
     def check_username_not_exist(*, params: CreateAccountByUsernameAndPasswordParams) -> None:
@@ -61,7 +64,8 @@ class AccountReader:
         if account_bson is None:
             return None
 
-        return AccountUtil.convert_account_bson_to_account(account_bson)
+        result = AccountUtil.convert_account_bson_to_account(account_bson)
+        return result
 
     @staticmethod
     def get_account_by_phone_number(*, phone_number: PhoneNumber) -> Account:
@@ -69,7 +73,8 @@ class AccountReader:
         if account is None:
             raise AccountWithPhoneNumberNotFoundError(phone_number=phone_number)
 
-        return account
+        result = account
+        return result
 
     @staticmethod
     def check_phone_number_not_exist(*, phone_number: PhoneNumber) -> None:

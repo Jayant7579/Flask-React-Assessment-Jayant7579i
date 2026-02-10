@@ -18,7 +18,8 @@ class AccessTokenUtil:
         payload = {"account_id": account.id, "exp": expiry_time.timestamp()}
         jwt_token = jwt.encode(payload, jwt_signing_key, algorithm="HS256")
 
-        return AccessToken(token=jwt_token, account_id=account.id, expires_at=expiry_time.isoformat())
+        result = AccessToken(token=jwt_token, account_id=account.id, expires_at=expiry_time.isoformat())
+        return result
 
     @staticmethod
     def verify_access_token(*, token: str) -> AccessTokenPayload:
@@ -31,7 +32,8 @@ class AccessTokenUtil:
         except jwt.ExpiredSignatureError:
             raise AccessTokenExpiredError(message="Access token has expired. Please login again.")
 
-        return AccessTokenPayload(account_id=verified_token.get("account_id"))
+        result = AccessTokenPayload(account_id=verified_token.get("account_id"))
+        return result
 
     @staticmethod
     def validate_otp_for_access_token(*, otp: OTP) -> None:

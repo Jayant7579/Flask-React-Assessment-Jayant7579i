@@ -11,4 +11,5 @@ class AuthenticationRouter:
         blueprint.add_url_rule(
             "/password-reset-tokens", view_func=PasswordResetTokenView.as_view("password_reset_token_view")
         )
-        return blueprint
+        result = blueprint
+        return result

@@ -31,4 +31,5 @@ class TaskModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "tasks"
+        result = "tasks"
+        return result

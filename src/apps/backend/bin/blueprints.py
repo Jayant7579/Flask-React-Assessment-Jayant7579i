@@ -18,19 +18,22 @@ MISSING_STATIC_ROOT_ERR_MESSAGE = "Unable to resolve react root path"
 @react_blueprint.route("/<path:path>")
 def serve_react_home(path: Union[os.PathLike, str]) -> Response:
     assert react_blueprint.static_folder, MISSING_STATIC_ROOT_ERR_MESSAGE
-    return send_from_directory(react_blueprint.static_folder, "index.html")
+    result = send_from_directory(react_blueprint.static_folder, "index.html")
+    return result
 
 
 @react_blueprint.route("/index.bundle.js")
 def serve_js_bundle() -> Response:
     assert react_blueprint.static_folder, MISSING_STATIC_ROOT_ERR_MESSAGE
-    return send_from_directory(react_blueprint.static_folder, "index.bundle.js")
+    result = send_from_directory(react_blueprint.static_folder, "index.bundle.js")
+    return result
 
 
 @react_blueprint.route("/style.css")
 def serve_css() -> Response:
     assert react_blueprint.static_folder, MISSING_STATIC_ROOT_ERR_MESSAGE
-    return send_from_directory(react_blueprint.static_folder, "style.css")
+    result = send_from_directory(react_blueprint.static_folder, "style.css")
+    return result
 
 
 # Server react static images
@@ -41,7 +44,8 @@ img_assets_blueprint = Blueprint("image_assets", __name__, static_folder=react_i
 @img_assets_blueprint.route("/assets/img/<path:filename>")
 def serve_static_images(filename: Union[os.PathLike, str]) -> Response:
     assert img_assets_blueprint.static_folder, MISSING_STATIC_ROOT_ERR_MESSAGE
-    return send_from_directory(img_assets_blueprint.static_folder, filename)
+    result = send_from_directory(img_assets_blueprint.static_folder, filename)
+    return result
 
 
 # Serve Api home page
@@ -51,4 +55,5 @@ api_blueprint = Blueprint("api", __name__, url_prefix="/api")
 @api_blueprint.route("/")
 def serve_api_home() -> Response:
     message = {"msg": "Start your development..."}
-    return Response(json.dumps(message), status=200)
+    result = Response(json.dumps(message), status=200)
+    return result

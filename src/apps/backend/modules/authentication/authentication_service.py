@@ -26,7 +26,8 @@ from modules.notification.types import EmailRecipient, EmailSender, SendEmailPar
 class AuthenticationService:
     @staticmethod
     def create_access_token_by_username_and_password(*, account: Account) -> AccessToken:
-        return AccessTokenUtil.generate_access_token(account=account)
+        result = AccessTokenUtil.generate_access_token(account=account)
+        return result
 
     @staticmethod
     def create_access_token_by_phone_number(
@@ -37,11 +38,13 @@ class AuthenticationService:
         )
         AccessTokenUtil.validate_otp_for_access_token(otp=otp)
 
-        return AccessTokenUtil.generate_access_token(account=account)
+        result = AccessTokenUtil.generate_access_token(account=account)
+        return result
 
     @staticmethod
     def verify_access_token(*, token: str) -> AccessTokenPayload:
-        return AccessTokenUtil.verify_access_token(token=token)
+        result = AccessTokenUtil.verify_access_token(token=token)
+        return result
 
     @staticmethod
     def create_password_reset_token(params: Account) -> PasswordResetToken:
@@ -50,19 +53,23 @@ class AuthenticationService:
         AuthenticationService.send_password_reset_email(
             account_id=params.id, first_name=params.first_name, username=params.username, password_reset_token=token
         )
-        return password_reset_token
+        result = password_reset_token
+        return result
 
     @staticmethod
     def get_password_reset_token_by_account_id(account_id: str) -> PasswordResetToken:
-        return PasswordResetTokenReader.get_password_reset_token_by_account_id(account_id)
+        result = PasswordResetTokenReader.get_password_reset_token_by_account_id(account_id)
+        return result
 
     @staticmethod
     def set_password_reset_token_as_used_by_id(password_reset_token_id: str) -> PasswordResetToken:
-        return PasswordResetTokenWriter.set_password_reset_token_as_used(password_reset_token_id)
+        result = PasswordResetTokenWriter.set_password_reset_token_as_used(password_reset_token_id)
+        return result
 
     @staticmethod
     def verify_password_reset_token(account_id: str, token: str) -> PasswordResetToken:
-        return PasswordResetTokenReader.verify_password_reset_token(account_id=account_id, token=token)
+        result = PasswordResetTokenReader.verify_password_reset_token(account_id=account_id, token=token)
+        return result
 
     @staticmethod
     def send_password_reset_email(account_id: str, first_name: str, username: str, password_reset_token: str) -> None:
@@ -100,8 +107,10 @@ class AuthenticationService:
             )
             SMSService.send_sms_for_account(account_id=account_id, bypass_preferences=True, params=send_sms_params)
 
-        return otp
+        result = otp
+        return result
 
     @staticmethod
     def verify_otp(*, params: VerifyOTPParams) -> OTP:
-        return OTPWriter.verify_otp(params=params)
+        result = OTPWriter.verify_otp(params=params)
+        return result

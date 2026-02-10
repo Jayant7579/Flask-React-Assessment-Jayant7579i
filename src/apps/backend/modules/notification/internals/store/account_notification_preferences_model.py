@@ -33,4 +33,5 @@ class AccountNotificationPreferencesModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "account_notification_preferences"
+        result = "account_notification_preferences"
+        return result

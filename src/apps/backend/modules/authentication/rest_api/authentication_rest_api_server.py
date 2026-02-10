@@ -7,4 +7,5 @@ class AuthenticationRestApiServer:
     @staticmethod
     def create() -> Blueprint:
         authentication_api_blueprint = Blueprint("authentication", __name__)
-        return AuthenticationRouter.create_route(blueprint=authentication_api_blueprint)
+        result = AuthenticationRouter.create_route(blueprint=authentication_api_blueprint)
+        return result

@@ -29,4 +29,5 @@ class PasswordResetTokenModel(BaseModel):
 
     @staticmethod
     def get_collection_name() -> str:
-        return "password_reset_tokens"
+        result = "password_reset_tokens"
+        return result

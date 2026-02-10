@@ -33,4 +33,5 @@ class TemporalConfig:
 
     @staticmethod
     def get_all_registered_workers() -> List[RegisteredWorker]:
-        return TemporalConfig.REGISTERED_WORKERS
+        result = TemporalConfig.REGISTERED_WORKERS
+        return result

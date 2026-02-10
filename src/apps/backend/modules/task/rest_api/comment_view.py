@@ -8,7 +8,7 @@ from flask.views import MethodView
 from modules.application.common.constants import DEFAULT_PAGINATION_PARAMS
 from modules.application.common.types import PaginationParams
 from modules.authentication.rest_api.access_auth_middleware import access_auth_middleware
-from modules.task.comment_errors import CommentBadRequestError
+from modules.task.errors import CommentBadRequestError
 from modules.task.comment_service import CommentService
 from modules.task.comment_types import (
     CreateCommentParams,
@@ -37,7 +37,8 @@ class CommentView(MethodView):
         created_comment = CommentService.create_comment(params=create_comment_params)
         comment_dict = asdict(created_comment)
 
-        return jsonify(comment_dict), 201
+        result = jsonify(comment_dict), 201
+        return result
 
     @access_auth_middleware
     def get(self, account_id: str, task_id: str, comment_id: Optional[str] = None) -> ResponseReturnValue:
@@ -45,7 +46,8 @@ class CommentView(MethodView):
             comment_params = GetCommentParams(account_id=account_id, task_id=task_id, comment_id=comment_id)
             comment = CommentService.get_comment(params=comment_params)
             comment_dict = asdict(comment)
-            return jsonify(comment_dict), 200
+            result = jsonify(comment_dict), 200
+            return result
         else:
             page = request.args.get("page", type=int)
             size = request.args.get("size", type=int)
@@ -70,7 +72,8 @@ class CommentView(MethodView):
 
             response_data = asdict(pagination_result)
 
-            return jsonify(response_data), 200
+            result = jsonify(response_data), 200
+            return result
 
     @access_auth_middleware
     def patch(self, account_id: str, task_id: str, comment_id: str) -> ResponseReturnValue:
@@ -89,7 +92,8 @@ class CommentView(MethodView):
         updated_comment = CommentService.update_comment(params=update_comment_params)
         comment_dict = asdict(updated_comment)
 
-        return jsonify(comment_dict), 200
+        result = jsonify(comment_dict), 200
+        return result
 
     @access_auth_middleware
     def delete(self, account_id: str, task_id: str, comment_id: str) -> ResponseReturnValue:
@@ -97,4 +101,5 @@ class CommentView(MethodView):
 
         CommentService.delete_comment(params=delete_params)
 
-        return "", 204
+        result = "", 204
+        return result

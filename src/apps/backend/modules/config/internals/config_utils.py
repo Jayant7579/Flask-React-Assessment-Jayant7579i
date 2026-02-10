@@ -22,7 +22,8 @@ class ConfigUtil:
                 else:
                     merged_config[key] = value
 
-        return merged_config
+        result = merged_config
+        return result
 
     @staticmethod
     def read_yml_from_config_dir(filename: str) -> dict[str, Any]:
@@ -36,7 +37,8 @@ class ConfigUtil:
             # Raised when filename is not found in config dir
             raise FileNotFoundError(f"Config file '{filename}' not found in {config_path}")
 
-        return content
+        result = content
+        return result
 
     @staticmethod
     def _get_base_config_directory(current_file: str) -> Path:
@@ -48,4 +50,5 @@ class ConfigUtil:
         if not config_path.exists() or not config_path.is_dir():
             raise FileNotFoundError(f"Config directory does not exist: {config_directory}")
 
-        return config_path
+        result = config_path
+        return result

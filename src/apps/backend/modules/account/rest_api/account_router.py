@@ -25,4 +25,5 @@ class AccountRouter:
             methods=["PATCH"],
         )
 
-        return blueprint
+        result = blueprint
+        return result
